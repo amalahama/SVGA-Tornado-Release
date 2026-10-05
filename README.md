@@ -1,6 +1,6 @@
 # SVGA Tornado: Digital Integration Tornado & Desert Storm in High-Resolution 800x600 VESA
 
-[![Release](https://img.shields.io/badge/Release-1.0-brightgreen.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
+[![Release](https://img.shields.io/badge/Release-1.1-brightgreen.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Resolution](https://img.shields.io/badge/Resolution-800x600%20256--Color%20VESA-blue.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Frame Rate](https://img.shields.io/badge/Frame%20Rate-Up%20to%2050%20FPS-green.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Platform](https://img.shields.io/badge/Platform-MS--DOS%20%2F%20DOSBox-orange.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
@@ -8,7 +8,7 @@
 
 Welcome to the official release repository for the **SVGA High-Resolution Port of Digital Integration's Tornado & Operation Desert Storm**
 
-This package contains the drop-in replacement archive **`Release 1.0.zip`** with all binary files and high-definition cockpit panels required to upgrade your original copy of Tornado from standard 320x200 Mode 13h to **800x600 256-color VESA SVGA** with fluid **50 FPS flight physics**, tear-free hardware double-buffering, and extensive visual refinements.
+This package contains the drop-in replacement archive **`Release 1.1.zip`** with all binary files and high-definition cockpit panels required to upgrade your original copy of Tornado from standard 320x200 Mode 13h to **800x600 256-color VESA SVGA** with fluid **50 FPS flight physics**, tear-free hardware double-buffering, and extensive visual refinements.
 
 ---
 
@@ -58,9 +58,20 @@ This package contains the drop-in replacement archive **`Release 1.0.zip`** with
 
 ---
 
-## Release Package: `Release 1.0.zip`
+## What's New in Release 1.1
 
-All replacement files are packaged together into **`Release 1.0.zip`** (~614 KB compressed / 4.6 MB uncompressed):
+* **Aircraft Photo Decompression Fix (Review Mode)**:
+  Fixed 4-bit delta decompression in `UnpackDeltaPic` by preserving the nibble phase mask (`ah`) and running delta accumulator (`bl`) across rows, eliminating horizontal static and displaying digitized aircraft photos (`.PT2`) in crisp high-definition 800x600.
+* **Review Mode 3D / 2D Cockpit Layout**:
+  Updated the combined 3D model viewport and scaled 2D tactical preview console to 800x120 with VESA bank routing.
+* **Compass & Cardinal Points Realignment (Explorer & Map Views)**:
+  Corrected line and tick mark coordinate scaling ($2.5\times$ horizontal, $3.0\times$ vertical) on the tactical compass, keeping cardinal points ('N', 'S', 'E', 'W') perfectly centered around the compass ring.
+
+---
+
+## Release Package: `Release 1.1.zip`
+
+All replacement files are packaged together into **`Release 1.1.zip`** (also mirrored as `Release1.1.zip`) (~605 KB compressed / 4.6 MB uncompressed):
 
 * **`FLIGHT.EXE`**: European Theater SVGA 800x600 executable
 * **`DESERT.EXE`**: Desert Storm Theater SVGA 800x600 executable
@@ -80,8 +91,8 @@ All replacement files are packaged together into **`Release 1.0.zip`** (~614 KB 
 ### Prerequisites
 You need an existing, working installation of **Digital Integration Tornado CD-ROM** (or floppy 1.0e) and **Operation Desert Storm**.
 
-### Step 1: Download `Release 1.0.zip`
-Download **`Release 1.0.zip`** from this repository.
+### Step 1: Download `Release 1.1.zip`
+Download **`Release 1.1.zip`** from this repository.
 
 ### Step 2: Backup Original Files *(Recommended)*
 Before extracting, create a backup copy of your original 320x200 files inside your game's `FLIGHT\` folder:
@@ -90,7 +101,7 @@ Before extracting, create a backup copy of your original 320x200 files inside yo
 * All 7 original `.BT2` files (`PILOTPAN.BT2`, `NAVIGPAN.BT2`, `PSIDEPAN.BT2`, `NSIDEPAN.BT2`, `FRAMEPAN.BT2`, `EXTRAPAN.BT2`, `PREVIEW.BT2`)
 
 ### Step 3: Extract into `FLIGHT\`
-Extract all files from **`Release 1.0.zip`** directly into the `FLIGHT\` directory of your Tornado installation (e.g. `C:\TORNADO\FLIGHT\` or `D:\TORNADO.CD\FLIGHT\`), replacing the existing files when prompted.
+Extract all files from **`Release 1.1.zip`** directly into the `FLIGHT\` directory of your Tornado installation (e.g. `C:\TORNADO\FLIGHT\` or `D:\TORNADO.CD\FLIGHT\`), replacing the existing files when prompted.
 
 ### Step 4: Run the Simulation
 Launch Tornado through DOSBox using your regular launcher (e.g. `T.BAT`, `GO.BAT`, or direct executable invocation).
