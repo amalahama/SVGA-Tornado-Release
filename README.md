@@ -1,6 +1,6 @@
 # SVGA Tornado: Digital Integration Tornado & Desert Storm in High-Resolution 800x600 VESA
 
-[![Release](https://img.shields.io/badge/Release-1.1-brightgreen.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
+[![Release](https://img.shields.io/badge/Release-1.0-brightgreen.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Resolution](https://img.shields.io/badge/Resolution-800x600%20256--Color%20VESA-blue.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Frame Rate](https://img.shields.io/badge/Frame%20Rate-Up%20to%2050%20FPS-green.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Platform](https://img.shields.io/badge/Platform-MS--DOS%20%2F%20DOSBox-orange.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
@@ -8,7 +8,7 @@
 
 Welcome to the official release repository for the **SVGA High-Resolution Port of Digital Integration's Tornado & Operation Desert Storm**
 
-This package contains the drop-in replacement archive **`Release 1.1.zip`** with all binary files and high-definition cockpit panels required to upgrade your original copy of Tornado from standard 320x200 Mode 13h to **800x600 256-color VESA SVGA** with fluid **50 FPS flight physics**, tear-free hardware double-buffering, and extensive visual refinements.
+This package contains the drop-in replacement archive **`Release 1.0.zip`** with all binary files and high-definition cockpit panels required to upgrade your original copy of Tornado from standard 320x200 Mode 13h to **800x600 256-color VESA SVGA** with fluid **50 FPS flight physics**, tear-free hardware double-buffering, and extensive visual refinements.
 
 ---
 
@@ -56,22 +56,9 @@ This package contains the drop-in replacement archive **`Release 1.1.zip`** with
 * **Dual-Theater Support**:
   Includes standalone executables for both the **European Theater** (`FLIGHT.EXE`) and the **Operation Desert Storm** Gulf War expansion (`DESERT.EXE`).
 
----
+## Release Package: `Release 1.0.zip`
 
-## What's New in Release 1.1
-
-* **Aircraft Photo Decompression Fix (Review Mode)**:
-  Fixed 4-bit delta decompression in `UnpackDeltaPic` by preserving the nibble phase mask (`ah`) and running delta accumulator (`bl`) across rows, eliminating horizontal static and displaying digitized aircraft photos (`.PT2`) in crisp high-definition 800x600.
-* **Review Mode 3D / 2D Cockpit Layout**:
-  Updated the combined 3D model viewport and scaled 2D tactical preview console to 800x120 with VESA bank routing.
-* **Compass & Cardinal Points Realignment (Explorer & Map Views)**:
-  Corrected line and tick mark coordinate scaling ($2.5\times$ horizontal, $3.0\times$ vertical) on the tactical compass, keeping cardinal points ('N', 'S', 'E', 'W') perfectly centered around the compass ring.
-
----
-
-## Release Package: `Release 1.1.zip`
-
-All replacement files are packaged together into **`Release 1.1.zip`** (also mirrored as `Release1.1.zip`) (~605 KB compressed / 4.6 MB uncompressed):
+All replacement files are packaged together into **`Release 1.0.zip`** (also mirrored as `Release1.0.zip`) (~605 KB compressed / 4.6 MB uncompressed):
 
 * **`FLIGHT.EXE`**: European Theater SVGA 800x600 executable
 * **`DESERT.EXE`**: Desert Storm Theater SVGA 800x600 executable
