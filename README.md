@@ -1,6 +1,6 @@
 # SVGA Tornado: Digital Integration Tornado & Desert Storm in High-Resolution 800x600 VESA
 
-[![Release](https://img.shields.io/badge/Release-1.0-brightgreen.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
+[![Release](https://img.shields.io/badge/Release-1.1-brightgreen.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Resolution](https://img.shields.io/badge/Resolution-800x600%20256--Color%20VESA-blue.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Frame Rate](https://img.shields.io/badge/Frame%20Rate-Up%20to%2050%20FPS-green.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Platform](https://img.shields.io/badge/Platform-MS--DOS%20%2F%20DOSBox-orange.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
@@ -8,7 +8,7 @@
 
 Welcome to the official release repository for the **SVGA High-Resolution Port of Digital Integration's Tornado & Operation Desert Storm**
 
-This package contains the drop-in replacement archive **`Release 1.0.zip`** with all binary files and high-definition cockpit panels required to upgrade your original copy of Tornado from standard 320x200 Mode 13h to **800x600 256-color VESA SVGA** with fluid **50 FPS flight physics**, tear-free hardware double-buffering, and extensive visual refinements.
+This package contains the drop-in replacement archive **`Release 1.1.zip`** with all binary files and high-definition cockpit panels required to upgrade your original copy of Tornado from standard 320x200 Mode 13h to **800x600 256-color VESA SVGA** with fluid **50 FPS flight physics**, tear-free hardware double-buffering, and extensive visual refinements.
 
 ---
 
@@ -39,13 +39,12 @@ This package contains the drop-in replacement archive **`Release 1.0.zip`** with
 * **Fluid 50 FPS Physics Integration**:
   Unlocks the simulation frame rate from its historical 16-20 FPS cap up to **50 FPS** (`MaxFrameRate = 2`) utilizing 32-bit fractional position and attitude integration.
 * **Redesigned High-Definition Cockpits**:
-  All 7 cockpit panel backdrops (`.BT2`) have been redesigned for 800x600 resolution:
+  The 6 in-flight cockpit panel backdrops (`.BT2`) have been redesigned for 800x600 resolution:
   * Pilot Main Instrument Panel (`PILOTPAN.BT2`)
   * Navigator / WSO Tactical Console (`NAVIGPAN.BT2`)
   * Pilot & Navigator Side Panels (`PSIDEPAN.BT2`, `NSIDEPAN.BT2`)
   * Cockpit Canopy Frame (`FRAMEPAN.BT2`)
   * Auxiliary Flight Instrument Panels (`EXTRAPAN.BT2`)
-  * 3D Object Preview Backdrop (`PREVIEW.BT2`)
 * **Tear-Free Hardware Double Buffering (Zero-Flicker VSYNC)**:
   Uses direct VESA VBE `AX=4F07h` page flipping synchronized with the vertical retrace interval, completely removing screen tearing and CRT raster flicker.
 * **Vectorial HUD & Avionics Symbology**:
@@ -56,9 +55,24 @@ This package contains the drop-in replacement archive **`Release 1.0.zip`** with
 * **Dual-Theater Support**:
   Includes standalone executables for both the **European Theater** (`FLIGHT.EXE`) and the **Operation Desert Storm** Gulf War expansion (`DESERT.EXE`).
 
-## Release Package: `Release 1.0.zip`
+---
 
-All replacement files are packaged together into **`Release 1.0.zip`** (also mirrored as `Release1.0.zip`) (~605 KB compressed / 4.6 MB uncompressed):
+## What's New in Release 1.1
+
+* **Sound Blaster Hardware Initialization Fix**:
+  Fixed Sound Blaster sound card detection (`VoiceInit` check) so that clean installations configured with Sound Blaster in `SETUP.INF` boot directly into Demo, Quickstart, and Campaign modes with full AdLib/FM audio without aborting with Error 241.
+* **Review Mode 2D Console & 64 KB PREVIEW.BT2 Restoration**:
+  Restored the authentic 64,000-byte `PREVIEW.BT2` backdrop in the distribution package. The SVGA engine scales this 2D console dynamically into the bottom 800x120 viewport, fixing panel corruption when upgrading over previous releases.
+* **Aircraft Photo Decompression Fix (Review Mode)**:
+  Fixed 4-bit delta decompression in `UnpackDeltaPic` by preserving the nibble phase mask (`ah`) and running delta accumulator (`bl`) across rows, eliminating horizontal static and displaying digitized aircraft photos (`.PT2`) in crisp high-definition 800x600.
+* **Compass & Cardinal Points Realignment (Explorer & Map Views)**:
+  Corrected line and tick mark coordinate scaling ($2.5\times$ horizontal, $3.0\times$ vertical) on the tactical compass, keeping cardinal points ('N', 'S', 'E', 'W') perfectly centered around the compass ring.
+
+---
+
+## Release Package: `Release 1.1.zip`
+
+All replacement files are packaged together into **`Release 1.1.zip`** (also mirrored as `Release1.1.zip`) (~608 KB compressed / 4.6 MB uncompressed):
 
 * **`FLIGHT.EXE`**: European Theater SVGA 800x600 executable
 * **`DESERT.EXE`**: Desert Storm Theater SVGA 800x600 executable
@@ -68,7 +82,7 @@ All replacement files are packaged together into **`Release 1.0.zip`** (also mir
 * **`NSIDEPAN.BT2`**: Navigator Left/Right Side Console (800x600)
 * **`FRAMEPAN.BT2`**: Cockpit Canopy Arch and Glass Frame (800x600)
 * **`EXTRAPAN.BT2`**: Auxiliary Instruments & Warning Panel (800x600)
-* **`PREVIEW.BT2`**: 3D Object Viewer Backdrop (800x600)
+* **`PREVIEW.BT2`**: Authentic Tactical Console Backdrop (320x200, dynamically scaled to 800x120)
 * **`DOSBOX_RECOMMENDATIONS.txt`**: Performance and audio tuning guide
 
 ---
