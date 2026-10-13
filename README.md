@@ -1,6 +1,6 @@
 # SVGA Tornado: Digital Integration Tornado & Desert Storm in High-Resolution 800x600 VESA
 
-[![Release](https://img.shields.io/badge/Release-1.2-brightgreen.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
+[![Release](https://img.shields.io/badge/Release-1.21-brightgreen.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Resolution](https://img.shields.io/badge/Resolution-800x600%20256--Color%20VESA-blue.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Frame Rate](https://img.shields.io/badge/Frame%20Rate-Up%20to%2050%20FPS-green.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Platform](https://img.shields.io/badge/Platform-MS--DOS%20%2F%20DOSBox-orange.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
@@ -8,7 +8,7 @@
 
 Welcome to the official release repository for the **SVGA High-Resolution Port of Digital Integration's Tornado & Operation Desert Storm**.
 
-This package contains the drop-in replacement archive **`Release 1.2.zip`** with all binary files, high-definition cockpit panels, hardware HOTAS 4-axis flight controls, and art conversion utilities required to upgrade your original copy of Tornado from standard 320x200 Mode 13h to **800x600 256-color VESA SVGA** with fluid **50 FPS flight physics**, tear-free hardware double-buffering, and extensive visual refinements.
+This package contains the drop-in replacement archive **`Release 1.21.zip`** with all binary files, high-definition cockpit panels, hardware HOTAS 4-axis flight controls, and art conversion utilities required to upgrade your original copy of Tornado from standard 320x200 Mode 13h to **800x600 256-color VESA SVGA** with fluid **50 FPS flight physics**, tear-free hardware double-buffering, and extensive visual refinements.
 
 ---
 
@@ -56,6 +56,14 @@ This package contains the drop-in replacement archive **`Release 1.2.zip`** with
   * Rebuilt high-density night sky starfield matching original visual depth.
 * **Dual-Theater Support**:
   Includes standalone executables for both the **European Theater** (`FLIGHT.EXE`) and the **Operation Desert Storm** Gulf War expansion (`DESERT.EXE`).
+
+---
+
+## What's New in Release 1.21
+
+### Autothrottle +/- Speed Control Fix for HOTAS / 4-Axis Controllers
+* **Target Airspeed Adjustment Restored:** Fixed an issue where the `+` and `-` keys/buttons did not adjust the demanded autothrottle airspeed (`AutoVias`) when flying with a 4-axis joystick or HOTAS controller (`CTRL_DEV_JOY2` / Standard Joystick + Rudder Pedals).
+* **Interrupt Routing Refinement:** Re-routed the 100 Hz timer interrupt table (`KbdCtrlSwitch[CTRL_DEV_JOY2]`) directly to `KbdThrottle`. When autothrottle is engaged (`AutoThrot = 1`), `KbdAutoThrot` now actively processes `+` and `-` inputs (incrementing/decrementing `AutoVias` smoothly), while in manual flight mode (`AutoThrot = 0`), physical throttle lever position continues to modulate engine thrust exclusively without key conflicts.
 
 ---
 
@@ -111,12 +119,12 @@ This package contains the drop-in replacement archive **`Release 1.2.zip`** with
 
 ---
 
-## Release Package: `Release 1.2.zip`
+## Release Package: `Release 1.21.zip`
 
-All replacement files are packaged together into **`Release 1.2.zip`** (also mirrored as `Release1.2.zip`) (~618 KB compressed / 4.7 MB uncompressed):
+All replacement files are packaged together into **`Release 1.21.zip`** (also mirrored as `Release1.21.zip`) (~618 KB compressed / 4.7 MB uncompressed):
 
-* **`FLIGHT.EXE`**: European Theater SVGA 800x600 executable (Release 1.2)
-* **`DESERT.EXE`**: Desert Storm Theater SVGA 800x600 executable (Release 1.2)
+* **`FLIGHT.EXE`**: European Theater SVGA 800x600 executable (Release 1.21)
+* **`DESERT.EXE`**: Desert Storm Theater SVGA 800x600 executable (Release 1.21)
 * **`PILOTPAN.BT2`**: Pilot Front Cockpit Panel (800x600 256-color)
 * **`NAVIGPAN.BT2`**: Navigator / WSO Tactical Radar Console (800x600)
 * **`PSIDEPAN.BT2`**: Pilot Left/Right Side Console (800x600)
@@ -136,8 +144,8 @@ All replacement files are packaged together into **`Release 1.2.zip`** (also mir
 ### Prerequisites
 You need an existing, working installation of **Digital Integration Tornado CD-ROM** (or floppy 1.0e) and **Operation Desert Storm**.
 
-### Step 1: Download `Release 1.2.zip`
-Download **`Release 1.2.zip`** from this repository.
+### Step 1: Download `Release 1.21.zip`
+Download **`Release 1.21.zip`** from this repository.
 
 ### Step 2: Backup Original Files *(Recommended)*
 Before extracting, create a backup copy of your original 320x200 files inside your game's `FLIGHT\` folder:
@@ -146,7 +154,7 @@ Before extracting, create a backup copy of your original 320x200 files inside yo
 * All 7 original `.BT2` files (`PILOTPAN.BT2`, `NAVIGPAN.BT2`, `PSIDEPAN.BT2`, `NSIDEPAN.BT2`, `FRAMEPAN.BT2`, `EXTRAPAN.BT2`, `PREVIEW.BT2`)
 
 ### Step 3: Extract into `FLIGHT\`
-Extract all files from **`Release 1.2.zip`** directly into the `FLIGHT\` directory of your Tornado installation (e.g. `C:\TORNADO\FLIGHT\` or `D:\TORNADO.CD\FLIGHT\`), replacing the existing files when prompted.
+Extract all files from **`Release 1.21.zip`** directly into the `FLIGHT\` directory of your Tornado installation (e.g. `C:\TORNADO\FLIGHT\` or `D:\TORNADO.CD\FLIGHT\`), replacing the existing files when prompted.
 
 ### Step 4: Run the Simulation
 Launch Tornado through DOSBox using your regular launcher (e.g. `T.BAT`, `GO.BAT`, or direct executable invocation).
