@@ -1,14 +1,14 @@
 # SVGA Tornado: Digital Integration Tornado & Desert Storm in High-Resolution 800x600 VESA
 
-[![Release](https://img.shields.io/badge/Release-1.1-brightgreen.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
+[![Release](https://img.shields.io/badge/Release-1.2-brightgreen.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Resolution](https://img.shields.io/badge/Resolution-800x600%20256--Color%20VESA-blue.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Frame Rate](https://img.shields.io/badge/Frame%20Rate-Up%20to%2050%20FPS-green.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Platform](https://img.shields.io/badge/Platform-MS--DOS%20%2F%20DOSBox-orange.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Donate with PayPal](https://img.shields.io/badge/Donate-PayPal-00457C.svg?style=for-the-badge&logo=paypal&logoColor=white)](https://paypal.me/amalahama)
 
-Welcome to the official release repository for the **SVGA High-Resolution Port of Digital Integration's Tornado & Operation Desert Storm**
+Welcome to the official release repository for the **SVGA High-Resolution Port of Digital Integration's Tornado & Operation Desert Storm**.
 
-This package contains the drop-in replacement archive **`Release 1.1.zip`** with all binary files and high-definition cockpit panels required to upgrade your original copy of Tornado from standard 320x200 Mode 13h to **800x600 256-color VESA SVGA** with fluid **50 FPS flight physics**, tear-free hardware double-buffering, and extensive visual refinements.
+This package contains the drop-in replacement archive **`Release 1.2.zip`** with all binary files, high-definition cockpit panels, hardware HOTAS 4-axis flight controls, and art conversion utilities required to upgrade your original copy of Tornado from standard 320x200 Mode 13h to **800x600 256-color VESA SVGA** with fluid **50 FPS flight physics**, tear-free hardware double-buffering, and extensive visual refinements.
 
 ---
 
@@ -46,14 +46,55 @@ This package contains the drop-in replacement archive **`Release 1.1.zip`** with
   * Cockpit Canopy Frame (`FRAMEPAN.BT2`)
   * Auxiliary Flight Instrument Panels (`EXTRAPAN.BT2`)
 * **Tear-Free Hardware Double Buffering (Zero-Flicker VSYNC)**:
-  Uses direct VESA VBE `AX=4F07h` page flipping synchronized with the vertical retrace interval, completely removing screen tearing and CRT raster flicker.
+  Uses direct VESA VBE `AX=4F07h` page flipping synchronized with the vertical retrace interval, completely removing screen tearing and CRT raster flicker across all DOSBox flavors including Vanilla DOSBox.
 * **Vectorial HUD & Avionics Symbology**:
   Precision-scaled Head-Up Display (HUD), Multi-Function Displays (MFD), look-down moving map, and air-to-air / air-to-ground radar sweeps adapted for high resolution.
+* **Hardware HOTAS 4-Axis Throttle & Rudder Support**:
+  Full continuous physical throttle lever (dry military thrust & progressive afterburner stages) and rudder pedals/twist grip integration.
 * **Enhanced Environmental & Combat Effects**:
   * Multi-stage sky gradient palettes for dawn, day, dusk, and night.
   * Rebuilt high-density night sky starfield matching original visual depth.
 * **Dual-Theater Support**:
   Includes standalone executables for both the **European Theater** (`FLIGHT.EXE`) and the **Operation Desert Storm** Gulf War expansion (`DESERT.EXE`).
+
+---
+
+## What's New in Release 1.2
+
+### 1. Vanilla DOSBox Compatibility & Zero-Flicker VSYNC
+* Re-engineered VESA double-buffering page flipping routines to call standard VBE `AX=4F07h, BX=0000h` synchronized with hardware CRT status register polling (port 3DAh vertical blanking).
+* Eliminates screen tearing and raster flickering on standard **Vanilla DOSBox 0.74 / 0.74-3** and DOSBox ECE without requiring specialized third-party patch builds.
+
+### 2. Native HOTAS 4-Axis Throttle & Rudder Hardware Support
+* Exposes full 4-axis flight controller support (Pitch, Roll, Yaw, Throttle):
+  * **Axis 1 & 2**: Aileron Roll and Elevator Pitch.
+  * **Axis 3**: Rudder Pedals or Joystick Twist Grip.
+  * **Axis 4**: Continuous Physical Throttle Lever.
+* **Throttle Modulation**:
+  * **Dry Military Thrust (0 to 26)**: Moving the physical throttle lever forward from 0% to ~80% travel smoothly and progressively modulates dry engine power.
+  * **Reheat / Afterburner Stages (27 to 32)**: Advancing past 80% engages 5 distinct reheat stages with tactile latching.
+  * **Autothrottle Integration**: Pressing `A` activates autothrottle to lock current airspeed. Moving the physical throttle lever beyond a widened deadband (+50% hysteresis buffer) automatically disconnects autothrottle back to manual lever control without accidental disconnections.
+* **Required DOSBox Configuration (`dosbox.conf`)**:
+  ```ini
+  [joystick]
+  joysticktype=4axis
+  timed=true
+  autofire=false
+  swap34=false
+  buttonwrap=false
+  ```
+* **In-Game Controls Setup**:
+  1. Go to the Tornado main menu $\rightarrow$ **Preferences** $\rightarrow$ **Controls**.
+  2. Select **Standard Joystick + Rudder Pedals**.
+  3. The simulation automatically detects Joystick B, routing Axis 3 to Rudder and Axis 4 to absolute physical Throttle.
+
+### 3. Elimination of Trapped / Ghost Pixels
+* **Radar Warning Receiver (RWR)**: Expanded the active refresh redraw rectangle from $120\times 72$ to $120\times 84$, covering the entire CRT green region and upper azimuth threat arc. Threat symbols moving across the top arch no longer leave stuck pixels.
+* **Pilot HUD Viewport**: Corrected boundary redrawing along the cockpit canopy frame.
+
+### 4. Cockpit Utility Suite (`tool/` directory inside zip)
+* Included **`tool/bt2_converter.py`**: A standalone Python 3 utility for bidirectional conversion between raw `.BT2` cockpit buffers and editable `.PNG` images with exact canonical 256-color palette roundtrip fidelity.
+* Included **`tool/README.md`**: A comprehensive technical reference dossier containing the complete coordinate layout, scaling formulas, needle radii, and bounding boxes for all instruments, dials, readouts, and MFDs in 800x600 SVGA.
 
 ---
 
@@ -70,12 +111,12 @@ This package contains the drop-in replacement archive **`Release 1.1.zip`** with
 
 ---
 
-## Release Package: `Release 1.1.zip`
+## Release Package: `Release 1.2.zip`
 
-All replacement files are packaged together into **`Release 1.1.zip`** (also mirrored as `Release1.1.zip`) (~608 KB compressed / 4.6 MB uncompressed):
+All replacement files are packaged together into **`Release 1.2.zip`** (also mirrored as `Release1.2.zip`) (~618 KB compressed / 4.7 MB uncompressed):
 
-* **`FLIGHT.EXE`**: European Theater SVGA 800x600 executable
-* **`DESERT.EXE`**: Desert Storm Theater SVGA 800x600 executable
+* **`FLIGHT.EXE`**: European Theater SVGA 800x600 executable (Release 1.2)
+* **`DESERT.EXE`**: Desert Storm Theater SVGA 800x600 executable (Release 1.2)
 * **`PILOTPAN.BT2`**: Pilot Front Cockpit Panel (800x600 256-color)
 * **`NAVIGPAN.BT2`**: Navigator / WSO Tactical Radar Console (800x600)
 * **`PSIDEPAN.BT2`**: Pilot Left/Right Side Console (800x600)
@@ -83,7 +124,10 @@ All replacement files are packaged together into **`Release 1.1.zip`** (also mir
 * **`FRAMEPAN.BT2`**: Cockpit Canopy Arch and Glass Frame (800x600)
 * **`EXTRAPAN.BT2`**: Auxiliary Instruments & Warning Panel (800x600)
 * **`PREVIEW.BT2`**: Authentic Tactical Console Backdrop (320x200, dynamically scaled to 800x120)
-* **`DOSBOX_RECOMMENDATIONS.txt`**: Performance and audio tuning guide
+* **`DOSBOX_RECOMMENDATIONS.txt`**: Performance, HOTAS controls, and audio tuning guide
+* **`tool/`**:
+  * **`tool/bt2_converter.py`**: Standalone BT2 $\leftrightarrow$ PNG conversion utility with canonical VGA palette
+  * **`tool/README.md`**: Utility instructions and SVGA cockpit instrument coordinate dossier
 
 ---
 
@@ -92,8 +136,8 @@ All replacement files are packaged together into **`Release 1.1.zip`** (also mir
 ### Prerequisites
 You need an existing, working installation of **Digital Integration Tornado CD-ROM** (or floppy 1.0e) and **Operation Desert Storm**.
 
-### Step 1: Download `Release 1.1.zip`
-Download **`Release 1.1.zip`** from this repository.
+### Step 1: Download `Release 1.2.zip`
+Download **`Release 1.2.zip`** from this repository.
 
 ### Step 2: Backup Original Files *(Recommended)*
 Before extracting, create a backup copy of your original 320x200 files inside your game's `FLIGHT\` folder:
@@ -102,7 +146,7 @@ Before extracting, create a backup copy of your original 320x200 files inside yo
 * All 7 original `.BT2` files (`PILOTPAN.BT2`, `NAVIGPAN.BT2`, `PSIDEPAN.BT2`, `NSIDEPAN.BT2`, `FRAMEPAN.BT2`, `EXTRAPAN.BT2`, `PREVIEW.BT2`)
 
 ### Step 3: Extract into `FLIGHT\`
-Extract all files from **`Release 1.1.zip`** directly into the `FLIGHT\` directory of your Tornado installation (e.g. `C:\TORNADO\FLIGHT\` or `D:\TORNADO.CD\FLIGHT\`), replacing the existing files when prompted.
+Extract all files from **`Release 1.2.zip`** directly into the `FLIGHT\` directory of your Tornado installation (e.g. `C:\TORNADO\FLIGHT\` or `D:\TORNADO.CD\FLIGHT\`), replacing the existing files when prompted.
 
 ### Step 4: Run the Simulation
 Launch Tornado through DOSBox using your regular launcher (e.g. `T.BAT`, `GO.BAT`, or direct executable invocation).
@@ -113,15 +157,15 @@ Launch Tornado through DOSBox using your regular launcher (e.g. `T.BAT`, `GO.BAT
 
 Rendering 800x600 at 50 FPS requires 7.5x the pixel fillrate of the original game. In DOSBox, uncalibrated CPU cycles or default audio buffer sizes can cause audio stuttering (*buffer underrun*) during polygon-heavy scenes (low-altitude flight, complex airbases, horizon gradients).
 
-To achieve **rock-solid 50 FPS** with **crystal-clear, stutter-free audio**, update your `dosbox.conf` with these settings:
+To achieve **rock-solid 50 FPS** with **crystal-clear, stutter-free audio** and **full 4-axis HOTAS controls**, update your `dosbox.conf` with these settings:
 
 ```ini
 [cpu]
 core=dynamic
 cputype=pentium
-cycles=fixed 95000
+cycles=fixed 75000
 # IMPORTANT: Avoid 'cycles=max'. Unbounded max cycles starves the host audio thread
-# and produces audio crackling. A fixed setting between 70000 and 95000 ensures
+# and produces audio crackling. A fixed setting between 70000 and 85000 ensures
 # rock-solid 50 FPS with consistent timing. If dynamic cycles are preferred, use:
 # cycles=max 85%
 
@@ -146,6 +190,14 @@ oplmode=opl3
 oplrate=48000
 # NOTE: 'oplrate=48000' must match the mixer rate to avoid internal OPL resampling.
 
+[joystick]
+joysticktype=4axis
+timed=true
+autofire=false
+swap34=false
+buttonwrap=false
+# NOTE: Exposes 4-axis hardware controllers (Axis 1=Roll, Axis 2=Pitch, Axis 3=Rudder, Axis 4=Throttle).
+
 [sdl]
 output=opengl
 # NOTE: Hardware-accelerated video blitting delegates 800x600 scaling to your GPU.
@@ -156,12 +208,12 @@ scaler=none
 ```
 
 ### Recommended DOSBox Flavors
-1. **[DOSBox-Staging](https://dosbox-staging.github.io/) (Highly Recommended)**:
+1. **Vanilla DOSBox 0.74-3 / ECE**:
+   Runs flawlessly with Release 1.2's zero-flicker VSYNC double buffering and tuned `[mixer]`, `[cpu]`, and `[joystick]` configuration.
+2. **[DOSBox-Staging](https://dosbox-staging.github.io/) (Highly Recommended)**:
    Includes a modern SDL2 multithreaded audio engine with dynamic rate control that completely prevents audio clicks, pops, and underruns.
-2. **[DOSBox-X](https://dosbox-x.com/)**:
+3. **[DOSBox-X](https://dosbox-x.com/)**:
    Full-featured emulator with native high-resolution VESA support and dedicated audio thread options (`audiothread=true`).
-3. **Vanilla DOSBox 0.74-3 / ECE**:
-   Works flawlessly with the tuned `[mixer]` and `[cpu]` configuration detailed above.
 
 ---
 
