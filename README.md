@@ -1,6 +1,6 @@
 # SVGA Tornado: Digital Integration Tornado & Desert Storm in High-Resolution 800x600 VESA
 
-[![Release](https://img.shields.io/badge/Release-1.22-brightgreen.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
+[![Release](https://img.shields.io/badge/Release-1.25-brightgreen.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Resolution](https://img.shields.io/badge/Resolution-800x600%20256--Color%20VESA-blue.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Frame Rate](https://img.shields.io/badge/Frame%20Rate-Up%20to%2050%20FPS-green.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Platform](https://img.shields.io/badge/Platform-MS--DOS%20%2F%20DOSBox-orange.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
@@ -8,7 +8,7 @@
 
 Welcome to the official release repository for the **SVGA High-Resolution Port of Digital Integration's Tornado & Operation Desert Storm**.
 
-This package contains the drop-in replacement archive **`Release 1.22.zip`** with all binary files, high-definition cockpit panels, hardware HOTAS 4-axis flight controls, and art conversion utilities required to upgrade your original copy of Tornado from standard 320x200 Mode 13h to **800x600 256-color VESA SVGA** with fluid **50 FPS flight physics**, tear-free hardware double-buffering, and extensive visual refinements.
+This package contains the drop-in replacement archive **`Release 1.25.zip`** with all binary files, high-definition cockpit panels, hardware HOTAS 4-axis flight controls, and art conversion utilities required to upgrade your original copy of Tornado from standard 320x200 Mode 13h to **800x600 256-color VESA SVGA** with fluid **50 FPS flight physics**, tear-free hardware double-buffering, and extensive visual refinements.
 
 ---
 
@@ -56,6 +56,27 @@ This package contains the drop-in replacement archive **`Release 1.22.zip`** wit
   * Rebuilt high-density night sky starfield matching original visual depth.
 * **Dual-Theater Support**:
   Includes standalone executables for both the **European Theater** (`FLIGHT.EXE`) and the **Operation Desert Storm** Gulf War expansion (`DESERT.EXE`).
+
+---
+
+## What's New in Release 1.25
+
+### 1. Sound Blaster Audio Mode Persistence Across All Game Modes
+* **Full Campaign & Mission Audio Persistence:** Fixed an issue where selecting Sound Blaster (or Roland MT-32 + Sound Blaster) in the setup menu reverted back to AdLib FM audio when flying Single Mission, Campaign, Training, or Simulator. The engine now reads configuration directly from `..\AMP\TORNADO.CFG` (Word 10), ensuring Sound Blaster audio persistence in all game modes.
+* **Elimination of In-Flight PC Speaker Theme Music Bleed:** The flight engine now silences the PC speaker music timer hook (`THEMEB.BIN`) during missions (`MusicCard = SND_NULL`), eliminating the simultaneous PC speaker tune bleed over digitized Sound Blaster engine sound and SFX.
+* **DSP Reset & Shutdown:** Clean DSP reset and proper DMA shutdown on game exit.
+
+### 2. TIALD Symbology Color Restoration
+* **Authentic Green HUD/FLIR Symbology:** Restored authentic bright green symbology (`COL_HUD` index 133, DAC `009h, 03Ah, 011h` / `36, 232, 68` RGB) for the TIALD screen targeting reticle, crosshair brackets, laser designator indicator (`L`), and track symbol (`T`), eliminating the black reticle anomaly and matching original CRT FLIR avionics.
+
+### 3. Cockpit Redraw & Pixel Trap Fixes
+* **Artificial Horizon & ADI Redraw:** Added full redraw coverage for the ADI (Attitude Direction Indicator) and expanded HSI redraw regions in both Pilot and Navigator (RIO) seats, completely eliminating trapped horizontal pixel bands above the artificial horizon.
+* **MFD ILS Crosshair Clipping:** Fixed trapped vertical line pixels on the left border of Pilot central MFD by adding strict coordinate boundary clipping.
+* **Navigator Console Master Arm Switch Guard:** Corrected switch guard sprite coordinates in `NAVIGPAN.BT2` and `VGAPANEL.ASM`, removing the stray red switch guard artifact rendered to the right of the central MFD.
+
+### 4. Updated 2D Cockpit Assets & Tooling
+* **NAVIGPAN.BT2:** Deployed updated 800x600 Navigator console asset with corrected Master Arm switch guard sprite positioning.
+* **Tool Suite (`tool/`):** Bundled `scale_bt2_800x600.py` alongside `bt2_converter.py` and technical reference dossier.
 
 ---
 
@@ -128,14 +149,14 @@ This package contains the drop-in replacement archive **`Release 1.22.zip`** wit
 
 ---
 
-## Release Package: `Release 1.22.zip`
+## Release Package: `Release 1.25.zip`
 
-All replacement files are packaged together into **`Release 1.22.zip`** (also mirrored as `Release1.22.zip`) (~618 KB compressed / 4.7 MB uncompressed):
+All replacement files are packaged together into **`Release 1.25.zip`** (also mirrored as `Release1.25.zip`) (~624 KB compressed / 4.7 MB uncompressed):
 
-* **`FLIGHT.EXE`**: European Theater SVGA 800x600 executable (Release 1.22)
-* **`DESERT.EXE`**: Desert Storm Theater SVGA 800x600 executable (Release 1.22)
+* **`FLIGHT.EXE`**: European Theater SVGA 800x600 executable (Release 1.25)
+* **`DESERT.EXE`**: Desert Storm Theater SVGA 800x600 executable (Release 1.25)
 * **`PILOTPAN.BT2`**: Pilot Front Cockpit Panel (800x600 256-color)
-* **`NAVIGPAN.BT2`**: Navigator / WSO Tactical Radar Console (800x600)
+* **`NAVIGPAN.BT2`**: Navigator / WSO Tactical Radar Console (800x600, updated Master Arm guard coordinates)
 * **`PSIDEPAN.BT2`**: Pilot Left/Right Side Console (800x600)
 * **`NSIDEPAN.BT2`**: Navigator Left/Right Side Console (800x600)
 * **`FRAMEPAN.BT2`**: Cockpit Canopy Arch and Glass Frame (800x600)
@@ -144,6 +165,7 @@ All replacement files are packaged together into **`Release 1.22.zip`** (also mi
 * **`DOSBOX_RECOMMENDATIONS.txt`**: Performance, HOTAS controls, and audio tuning guide
 * **`tool/`**:
   * **`tool/bt2_converter.py`**: Standalone BT2 $\leftrightarrow$ PNG conversion utility with canonical VGA palette
+  * **`tool/scale_bt2_800x600.py`**: 800x600 cockpit scaler and sprite atlas pre-compositor
   * **`tool/README.md`**: Utility instructions and SVGA cockpit instrument coordinate dossier
 
 ---
@@ -153,8 +175,8 @@ All replacement files are packaged together into **`Release 1.22.zip`** (also mi
 ### Prerequisites
 You need an existing, working installation of **Digital Integration Tornado CD-ROM** (or floppy 1.0e) and **Operation Desert Storm**.
 
-### Step 1: Download `Release 1.22.zip`
-Download **`Release 1.22.zip`** from this repository.
+### Step 1: Download `Release 1.25.zip`
+Download **`Release 1.25.zip`** from this repository.
 
 ### Step 2: Backup Original Files *(Recommended)*
 Before extracting, create a backup copy of your original 320x200 files inside your game's `FLIGHT\` folder:
@@ -163,7 +185,7 @@ Before extracting, create a backup copy of your original 320x200 files inside yo
 * All 7 original `.BT2` files (`PILOTPAN.BT2`, `NAVIGPAN.BT2`, `PSIDEPAN.BT2`, `NSIDEPAN.BT2`, `FRAMEPAN.BT2`, `EXTRAPAN.BT2`, `PREVIEW.BT2`)
 
 ### Step 3: Extract into `FLIGHT\`
-Extract all files from **`Release 1.22.zip`** directly into the `FLIGHT\` directory of your Tornado installation (e.g. `C:\TORNADO\FLIGHT\` or `D:\TORNADO.CD\FLIGHT\`), replacing the existing files when prompted.
+Extract all files from **`Release 1.25.zip`** directly into the `FLIGHT\` directory of your Tornado installation (e.g. `C:\TORNADO\FLIGHT\` or `D:\TORNADO.CD\FLIGHT\`), replacing the existing files when prompted.
 
 ### Step 4: Run the Simulation
 Launch Tornado through DOSBox using your regular launcher (e.g. `T.BAT`, `GO.BAT`, or direct executable invocation).
