@@ -1,6 +1,6 @@
 # SVGA Tornado: Digital Integration Tornado & Desert Storm in High-Resolution 800x600 VESA
 
-[![Release](https://img.shields.io/badge/Release-1.25-brightgreen.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
+[![Release](https://img.shields.io/badge/Release-1.26-brightgreen.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Resolution](https://img.shields.io/badge/Resolution-800x600%20256--Color%20VESA-blue.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Frame Rate](https://img.shields.io/badge/Frame%20Rate-Up%20to%2050%20FPS-green.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
 [![Platform](https://img.shields.io/badge/Platform-MS--DOS%20%2F%20DOSBox-orange.svg?style=for-the-badge)](https://github.com/amalahama/SVGA-Tornado-Release)
@@ -8,7 +8,7 @@
 
 Welcome to the official release repository for the **SVGA High-Resolution Port of Digital Integration's Tornado & Operation Desert Storm**.
 
-This package contains the drop-in replacement archive **`Release 1.25.zip`** with all binary files, high-definition cockpit panels, hardware HOTAS 4-axis flight controls, and art conversion utilities required to upgrade your original copy of Tornado from standard 320x200 Mode 13h to **800x600 256-color VESA SVGA** with fluid **50 FPS flight physics**, tear-free hardware double-buffering, and extensive visual refinements.
+This package contains the drop-in replacement archive **`Release 1.26.zip`** with all binary files, high-definition cockpit panels, hardware HOTAS 4-axis flight controls, and art conversion utilities required to upgrade your original copy of Tornado from standard 320x200 Mode 13h to **800x600 256-color VESA SVGA** with fluid **50 FPS flight physics**, tear-free hardware double-buffering, and extensive visual refinements.
 
 ---
 
@@ -56,6 +56,18 @@ This package contains the drop-in replacement archive **`Release 1.25.zip`** wit
   * Rebuilt high-density night sky starfield matching original visual depth.
 * **Dual-Theater Support**:
   Includes standalone executables for both the **European Theater** (`FLIGHT.EXE`) and the **Operation Desert Storm** Gulf War expansion (`DESERT.EXE`).
+
+---
+
+## What's New in Release 1.26
+
+### 1. ESCAN / TFR CRT 1-Pixel Border Leak Fix
+* **Cockpit Bezel Protection:** Fixed a 1-pixel graphic leak on the left edge of the Pilot's E-Scan / Terrain Following Radar (TFR) CRT screen (`X = 179` in 800x600 resolution). In SVGA, coordinate scaling and line thickening previously caused the aircraft datum mark and radar noise traces to bleed 1 pixel left onto the grey cockpit bezel.
+* **Driver-Level Clamping:** Added strict bounding box clamping in `LIB8086/VGA_DRVR.ASM` for the E-Scope active CRT viewport (`X = 180..259`, `Y = 333..392`) and Navigator MFD (`X = 320..479`, `Y = 171..314`), ensuring vertical lines and pixel spans never overflow onto instrument bezels.
+
+### 2. Updated Executables & Tooling Package
+* **Fresh Binaries:** Recompiled and linked both `FLIGHT.EXE` (European Theater) and `DESERT.EXE` (Desert Storm) with zero assembler/linker errors.
+* **Complete Tooling Suite:** Includes `tool/PALETTE.MD` (full technical guide to Tornado's 256-color palette, dynamic night red-lighting, and cockpit index allocation) and the updated `tool/bt2_converter.py` utility.
 
 ---
 
@@ -149,12 +161,12 @@ This package contains the drop-in replacement archive **`Release 1.25.zip`** wit
 
 ---
 
-## Release Package: `Release 1.25.zip`
+## Release Package: `Release 1.26.zip`
 
-All replacement files are packaged together into **`Release 1.25.zip`** (also mirrored as `Release1.25.zip`) (~624 KB compressed / 4.7 MB uncompressed):
+All replacement files are packaged together into **`Release 1.26.zip`** (also mirrored as `Release1.26.zip`) (~625 KB compressed / 4.7 MB uncompressed):
 
-* **`FLIGHT.EXE`**: European Theater SVGA 800x600 executable (Release 1.25)
-* **`DESERT.EXE`**: Desert Storm Theater SVGA 800x600 executable (Release 1.25)
+* **`FLIGHT.EXE`**: European Theater SVGA 800x600 executable (Release 1.26)
+* **`DESERT.EXE`**: Desert Storm Theater SVGA 800x600 executable (Release 1.26)
 * **`PILOTPAN.BT2`**: Pilot Front Cockpit Panel (800x600 256-color)
 * **`NAVIGPAN.BT2`**: Navigator / WSO Tactical Radar Console (800x600, updated Master Arm guard coordinates)
 * **`PSIDEPAN.BT2`**: Pilot Left/Right Side Console (800x600)
@@ -165,6 +177,7 @@ All replacement files are packaged together into **`Release 1.25.zip`** (also mi
 * **`DOSBOX_RECOMMENDATIONS.txt`**: Performance, HOTAS controls, and audio tuning guide
 * **`tool/`**:
   * **`tool/bt2_converter.py`**: Standalone BT2 $\leftrightarrow$ PNG conversion utility with canonical VGA palette
+  * **`tool/PALETTE.MD`**: In-depth palette architecture guide (256-color DAC, night illumination, index prioritization)
   * **`tool/scale_bt2_800x600.py`**: 800x600 cockpit scaler and sprite atlas pre-compositor
   * **`tool/README.md`**: Utility instructions and SVGA cockpit instrument coordinate dossier
 
@@ -175,8 +188,8 @@ All replacement files are packaged together into **`Release 1.25.zip`** (also mi
 ### Prerequisites
 You need an existing, working installation of **Digital Integration Tornado CD-ROM** (or floppy 1.0e) and **Operation Desert Storm**.
 
-### Step 1: Download `Release 1.25.zip`
-Download **`Release 1.25.zip`** from this repository.
+### Step 1: Download `Release 1.26.zip`
+Download **`Release 1.26.zip`** from this repository.
 
 ### Step 2: Backup Original Files *(Recommended)*
 Before extracting, create a backup copy of your original 320x200 files inside your game's `FLIGHT\` folder:
@@ -185,7 +198,7 @@ Before extracting, create a backup copy of your original 320x200 files inside yo
 * All 7 original `.BT2` files (`PILOTPAN.BT2`, `NAVIGPAN.BT2`, `PSIDEPAN.BT2`, `NSIDEPAN.BT2`, `FRAMEPAN.BT2`, `EXTRAPAN.BT2`, `PREVIEW.BT2`)
 
 ### Step 3: Extract into `FLIGHT\`
-Extract all files from **`Release 1.25.zip`** directly into the `FLIGHT\` directory of your Tornado installation (e.g. `C:\TORNADO\FLIGHT\` or `D:\TORNADO.CD\FLIGHT\`), replacing the existing files when prompted.
+Extract all files from **`Release 1.26.zip`** directly into the `FLIGHT\` directory of your Tornado installation (e.g. `C:\TORNADO\FLIGHT\` or `D:\TORNADO.CD\FLIGHT\`), replacing the existing files when prompted.
 
 ### Step 4: Run the Simulation
 Launch Tornado through DOSBox using your regular launcher (e.g. `T.BAT`, `GO.BAT`, or direct executable invocation).
